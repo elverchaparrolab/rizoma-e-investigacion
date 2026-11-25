@@ -1,0 +1,107 @@
+@use "./variables.scss" as *;
+
+// put your custom CSS here!
+
+// Diseño de la Ruta de investigación con IA: Source Serif 4 en títulos, Source Sans 3 en texto,
+// IBM Plex Mono en rótulos; azul #1f5fa6 como acento, paneles grises suaves y bordes finos.
+:root {
+  --r-ink: #0e1f33; --r-text: #3d4a5c; --r-muted: #56637a; --r-line: #dde3ea;
+  --r-panel: #f4f6f9; --r-blue: #1f5fa6; --r-blue-soft: #eaf1fa;
+  --r-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --r-body: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  --r-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+:root[saved-theme="dark"] {
+  --r-ink: #eef1f6; --r-text: #b8c0cc; --r-muted: #8b95a3; --r-line: #2b313b;
+  --r-panel: #181c24; --r-blue: #7c9bff; --r-blue-soft: #1a2340;
+}
+body { font-family: var(--r-body); color: var(--r-text); }
+h1, h2, h3, h4, .article-title, .page-title {
+  font-family: var(--r-display) !important; color: var(--r-ink); letter-spacing: -0.02em; text-wrap: balance;
+}
+article { font-size: 17px; line-height: 1.6; }
+article li::marker { color: var(--r-blue); }
+article h2 { border-top: 1px solid var(--r-line); padding-top: 1.4rem; margin-top: 2.2rem; }
+// Título de cada página con el hilo azul de la portada de la Ruta
+h1.article-title { border-left: 4px solid var(--r-blue); padding-left: 18px; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; }
+.content-meta { font-family: var(--r-mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--r-muted); padding-left: 22px; }
+// Enlaces internos sin fondo, en azul
+a.internal {
+  background-color: transparent !important;
+  padding: 0 !important;
+  &:hover { text-decoration: underline; }
+  // Notas no publicadas: se ven atenuadas y no llevan a ninguna parte
+  &.broken {
+    color: var(--gray) !important;
+    opacity: 1 !important;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+// Barras laterales como los paneles de la Ruta
+@media all and (min-width: 1200px) {
+  .sidebar.left, .sidebar.right { background-color: var(--r-panel); }
+  .sidebar.left { border-right: 1px solid var(--r-line); }
+  .sidebar.right { border-left: 1px solid var(--r-line); }
+}
+.page-title, .page-title a, h2.page-title { font-size: 1.3rem !important; line-height: 1.25; word-break: normal; hyphens: none; }
+// Tablas con cabecera en tinta, como en la Ruta
+table { font-size: 0.95em; border-collapse: collapse; }
+thead th { background: var(--r-ink); color: var(--light); font-family: var(--r-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+tbody tr:nth-child(even) td { background: var(--r-panel); }
+blockquote { border-left: 3px solid var(--r-blue); background: var(--r-blue-soft); border-radius: 0 10px 10px 0; padding: 0.6rem 1rem; color: var(--r-ink); }
+
+// Esquemas ampliables: al pulsar, se abren a pantalla completa (sin JavaScript)
+a.zoom-abrir, a.zoom-fondo { display: block; cursor: zoom-in; background: transparent !important; padding: 0 !important; }
+a.zoom-fondo { cursor: zoom-out; }
+.zoom-pista { display: block; text-align: center; font-size: 0.82rem; color: var(--gray); margin: 0.2rem 0 1rem; }
+.zoom-capa { display: none; }
+.zoom-capa:target {
+  display: block; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(18, 22, 26, 0.93); overflow: auto;
+  padding: 64px 2vw 3vw;
+}
+.zoom-capa img {
+  display: block; width: max(1100px, 96vw); max-width: none; margin: 0 auto;
+  background: #fff; border-radius: 12px;
+}
+a.zoom-cerrar {
+  position: fixed; top: 14px; right: 22px; z-index: 10000;
+  color: #fff !important; background: rgba(0, 0, 0, 0.6) !important;
+  padding: 6px 16px !important; border-radius: 20px; font-weight: 600; text-decoration: none !important;
+}
+
+// Autoría y navegación comunes a todas las secciones del MOOC.
+.mooc-author { text-align: center; background: var(--light); border: 1px solid var(--r-line); border-radius: 14px; padding: 18px 14px; }
+.mooc-author img { display: block; width: 128px; height: 128px; object-fit: cover; border-radius: 50%; margin: 0 auto 0.65rem; border: 3px solid var(--r-blue-soft); }
+.mooc-author p { margin: 0.5rem 0; font-size: 1rem; line-height: 1.45; color: var(--r-ink); }
+.mooc-author p strong { font-family: var(--r-display); font-size: 1.1rem; }
+.mooc-social-links, .mooc-return-links { display: flex; flex-wrap: wrap; gap: 4px; font-size: 0.88rem; line-height: 1.4; }
+.mooc-social-links { justify-content: center; margin: 0.75rem 0 0; }
+.mooc-social-links a, .mooc-return-links a { display: block; padding: 5px 10px; border-radius: 99px; text-decoration: none; color: var(--r-text); background: transparent !important; }
+.mooc-social-links a:hover, .mooc-return-links a:hover { background: var(--r-blue-soft) !important; color: var(--r-blue); }
+.mooc-return-links { padding-bottom: 10px; margin-bottom: 1rem; border-bottom: 1px solid var(--r-line); }
+// Línea de autoría: rótulo en mono como el «eyebrow» de la Ruta
+.mooc-autoria { margin: 0 0 1.2rem; padding: 12px 16px; border-radius: 12px; background: var(--r-blue-soft); color: var(--r-ink); font-size: 0.95rem; line-height: 1.5; }
+.mooc-autoria .eb { display: block; font-family: var(--r-mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--r-blue); margin-bottom: 2px; }
+.mooc-autoria strong { color: var(--r-ink); }
+.mooc-content-license { margin-top: 2rem; padding: 20px 22px; border-radius: 14px; background: var(--r-panel); font-size: 1rem; }
+.mooc-content-license h2 { margin-top: 0; padding-top: 0; border-top: 0; font-size: 1.25rem; }
+.mooc-content-license p { margin: 0.7rem 0; line-height: 1.6; }
+footer { border-top: 1px solid var(--r-line); font-size: 0.84rem; color: var(--r-muted); }
+@media (max-width: 800px) {
+  .mooc-author { text-align: left; }
+  .mooc-author img { width: 80px; height: 80px; margin-left: 0; }
+  .mooc-social-links { justify-content: flex-start; }
+}
+
+// El tema de Obsidian trae acento morado: se reemplaza por el azul de la Ruta.
+:root, body, .theme-light, .theme-dark {
+  --accent-h: 211 !important; --accent-s: 69% !important; --accent-l: 39% !important;
+  --secondary: #1f5fa6 !important; --tertiary: #c81e4a !important;
+}
+:root[saved-theme="dark"], :root[saved-theme="dark"] body, .theme-dark {
+  --accent-h: 225 !important; --accent-s: 100% !important; --accent-l: 74% !important;
+  --secondary: #7c9bff !important; --tertiary: #ff7a9a !important;
+}
+article a, a.internal, a.external { color: var(--r-blue) !important; }
