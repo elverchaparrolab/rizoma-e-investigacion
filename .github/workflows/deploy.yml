@@ -1,5 +1,8 @@
 name: Publicar en GitHub Pages
 
+# Construye el sitio con Quartz y lo publica en la rama gh-pages.
+# GitHub Pages sirve esa rama en https://elverchaparrolab.github.io/rizoma-e-investigacion/
+
 on:
   push:
     branches:
@@ -7,16 +10,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -29,18 +30,13 @@ jobs:
         run: npm ci
       - name: Construir el sitio
         run: npx quartz build
-      - name: Subir el sitio
-        uses: actions/upload-pages-artifact@v3
+      - name: Evitar el procesamiento de Jekyll
+        run: touch public/.nojekyll
+      - name: Publicar en la rama gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: public
-
-  deploy:
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Publicar
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: "Publicar sitio"
