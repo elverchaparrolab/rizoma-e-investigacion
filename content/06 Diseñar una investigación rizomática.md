@@ -5,6 +5,9 @@ description: "Una guía práctica para diseñar un estudio rizomático o cartogr
 
 Un diseño rizomático no es un protocolo cerrado, pero tampoco es improvisación. Estas pistas, adaptadas de la cartografía (Passos et al., 2009) y del rizoanálisis (Masny, 2013), sirven para un proyecto de posgrado.
 
+> [!warning] Pistas, no receta
+> Los pasos numerados de esta página son una ayuda para empezar, no un procedimiento que deba cumplirse en orden. Si se aplican como protocolo, el rizoma vuelve a ser un árbol: esa es la advertencia de St. Pierre (2014) y de la escuela brasileña de la cartografía. El diseño se escribe para el anteproyecto y se **reescribe en el campo**; el diario del cartógrafo registra cada cambio y por qué ocurrió.
+
 ## 1. Formular una pregunta de proceso
 
 Las preguntas rizomáticas preguntan **cómo**, no **qué es**.
@@ -52,5 +55,7 @@ El informe puede organizarse en **mesetas**: capítulos relativamente autónomos
 
 > [!tip] Con inteligencia artificial
 > La IA puede ayudar a visualizar redes de conexiones o a releer el diario buscando recurrencias, pero no puede reconocer un acontecimiento ni decidir qué línea seguir: esa atención es del cartógrafo. Vea la [Ruta de investigación con IA](https://investigium.github.io/ruta-investigacion-ia/).
+
+Vea cómo se aplican estas pistas en [[09 Un ejemplo trabajado|un ejemplo trabajado]].
 
 Siguiente estación: [[07 Calidad, ética y límites|Calidad, ética y límites]].

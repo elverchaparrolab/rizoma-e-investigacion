@@ -5,7 +5,7 @@ description: "Una metodología de investigación inspirada en el rizoma de Deleu
 
 Hay investigaciones que no caben en un árbol. Su objeto no tiene raíz única ni tronco ordenado: es una red de prácticas, afectos, imágenes, discursos y cuerpos que se conectan por el medio. Para esos casos, Gilles Deleuze y Félix Guattari propusieron la figura del **rizoma**, y varias tradiciones de investigación la convirtieron en método: la **cartografía**, el **rizoanálisis** y la **a/r/tografía**.
 
-Este sitio reúne esa propuesta en ocho estaciones. Puede recorrerlas en orden o entrar por cualquiera, como corresponde a un rizoma.
+Este sitio reúne esa propuesta en nueve estaciones. Puede recorrerlas en orden o entrar por cualquiera, como corresponde a un rizoma.
 
 > [!info] Para quién
 > Estudiantes de posgrado, docentes e investigadores en educación, artes, estudios visuales, salud y ciencias sociales que estudian procesos en movimiento: subjetividades, prácticas, territorios, aprendizajes, imágenes.
@@ -20,6 +20,7 @@ Este sitio reúne esa propuesta en ocho estaciones. Puede recorrerlas en orden o
 6. [[06 Diseñar una investigación rizomática|Diseñar una investigación rizomática]]: de la pregunta al informe.
 7. [[07 Calidad, ética y límites|Calidad, ética y límites]]: cómo se evalúa y qué críticas recibe.
 8. [[08 Referencias|Referencias]]: obras citadas, con DOI verificado.
+9. [[09 Un ejemplo trabajado|Un ejemplo trabajado]]: cartografiar la mirada en un aula de artes.
 
 ## Cómo se conecta con otras metodologías
 

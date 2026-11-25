@@ -3,7 +3,7 @@ title: "3. La cartografía como método"
 description: "La cartografía de la escuela brasileña: acompañar procesos, los cuatro gestos de la atención del cartógrafo y la pesquisa-intervención."
 ---
 
-La traducción más desarrollada del rizoma en método viene de Brasil. Desde la psicología social y la salud colectiva, un grupo de investigadores reunidos por Passos, Kastrup y Escóssia (2009) propuso la **cartografía** como método de pesquisa-intervención. Su idea central: investigar no es representar un objeto, sino **acompañar un proceso**.
+La traducción más desarrollada del rizoma en método viene de América Latina. Sus raíces están en el viaje de Félix Guattari por Brasil en 1982, recogido con Suely Rolnik en *Micropolítica: cartografías del deseo* (Guattari y Rolnik, 2006), y en la *Cartografia sentimental* de Rolnik (1989), que propuso al cartógrafo como alguien que acompaña los movimientos del deseo y la subjetividad. Desde la psicología social y la salud colectiva, un grupo de investigadores reunidos por Passos, Kastrup y Escóssia (2009) propuso la **cartografía** como método de pesquisa-intervención. Su idea central: investigar no es representar un objeto, sino **acompañar un proceso**.
 
 ## Invertir el sentido del método
 

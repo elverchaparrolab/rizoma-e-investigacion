@@ -3,11 +3,13 @@ title: "8. Referencias"
 description: "Obras citadas en Rizoma e investigación, en formato APA 7, con DOI verificado en Crossref."
 ---
 
-Los DOI de los artículos fueron verificados en Crossref y OpenAlex en noviembre de 2026. Los libros sin DOI se citan por su edición.
+Los DOI fueron verificados en Crossref y OpenAlex en noviembre de 2026. Las obras sin DOI se citan por su edición.
 
 ## Fuente filosófica
 
 Deleuze, G., y Guattari, F. (1988). *Mil mesetas: Capitalismo y esquizofrenia* (J. Vázquez Pérez, Trad.). Pre-Textos. (Obra original publicada en 1980)
+
+Guattari, F., y Rolnik, S. (2006). *Micropolítica: Cartografías del deseo* (F. Gómez, Trad.). Traficantes de Sueños. (Obra original publicada en 1986)
 
 ## Cartografía
 
@@ -23,9 +25,15 @@ Passos, E., Kastrup, V., y Escóssia, L. da (Orgs.). (2009). *Pistas do método 
 
 Paulon, S. M., y Romagnoli, R. C. (2010). Pesquisa-intervenção e cartografia: Melindres e meandros metodológicos. *Estudos e Pesquisas em Psicologia, 10*(1). https://doi.org/10.12957/epp.2010.9019
 
+Rolnik, S. (1989). *Cartografia sentimental: Transformações contemporâneas do desejo*. Estação Liberdade.
+
 Romagnoli, R. C. (2009). A cartografia e a relação pesquisa e vida. *Psicologia & Sociedade, 21*(2), 166–173. https://doi.org/10.1590/S0102-71822009000200003
 
 ## Rizoanálisis y pensamiento poscualitativo
+
+Andrade Salazar, J. A., y Rivera Pérez, R. (2024). La investigación relacional y la metodología rizomática: Apuestas para la comprensión transmetódica de la violencia y la resistencia. En *Elementos para una relación entre biopolítica, necropolítica, educación y complejidad* (pp. 19–61). Editorial Universidad El Bosque. https://doi.org/10.2307/jj.34366965.4
+
+Cetina Ortiz, W. (2026). Redes de bienestar estudiantil: Investigación rizomática en territorios escolares. *Ciencia y Reflexión, 5*(1), 1501–1528. https://doi.org/10.70747/cr.v5i1.800
 
 Fox, N. J., y Alldred, P. (2015). New materialist social inquiry: Designs, methods and the research-assemblage. *International Journal of Social Research Methodology, 18*(4), 399–414. https://doi.org/10.1080/13645579.2014.921458
 
@@ -53,6 +61,14 @@ St. Pierre, E. A. (2014). A brief and personal history of post qualitative resea
 
 Irwin, R. L., Beer, R., Springgay, S., Grauer, K., Xiong, G., y Bickel, B. (2006). The rhizomatic relations of a/r/tography. *Studies in Art Education, 48*(1), 70–88. https://doi.org/10.1080/00393541.2006.11650500
 
+Irwin, R. L., y García Sierra, D. (2013). La práctica de la a/r/tografía. *Revista Educación y Pedagogía, 25*(65), 106–113.
+
+Marín-Viadel, R., y Roldán, J. (2019). A/r/tografía e investigación educativa basada en artes visuales en el panorama de las metodologías de investigación en educación artística. *Arte, Individuo y Sociedad, 31*(4), 881–895. https://doi.org/10.5209/aris.63409
+
 Pérez de Lama, J. (2009). La avispa y la orquídea hacen mapa en el seno de un rizoma: Cartografía y máquinas, releyendo a Deleuze y Guattari. *Pro-Posições, 20*(3), 121–145. https://doi.org/10.1590/S0103-73072009000300009
 
+Ramon, R., y Alonso-Sanz, A. (2022). La c/a/r/tografía en el aula como instrumento de desarrollo creativo, visual y de pensamiento complejo a través de las artes. *Kepes, 19*(25), 531–563. https://doi.org/10.17151/kepes.2022.19.25.18
+
 Springgay, S., Irwin, R. L., y Kind, S. W. (2005). A/r/tography as living inquiry through art and text. *Qualitative Inquiry, 11*(6), 897–912. https://doi.org/10.1177/1077800405280696
+
+Para ver el método en acción: [[09 Un ejemplo trabajado|Un ejemplo trabajado]].

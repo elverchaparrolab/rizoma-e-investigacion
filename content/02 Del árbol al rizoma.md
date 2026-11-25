@@ -27,6 +27,8 @@ La investigación cualitativa convencional suele seguir un recorrido arborescent
 
 Es pertinente cuando el objeto **cambia mientras se estudia**, cuando involucra **elementos heterogéneos** (cuerpos, objetos, imágenes, normas, afectos) y cuando interesa **lo que emerge** más que lo que se confirma. Es habitual en educación artística, estudios visuales, salud mental, estudios urbanos y formación docente.
 
+En Colombia, Andrade Salazar y Rivera Pérez (2024) discuten la metodología rizomática dentro de una investigación relacional sobre violencia y resistencia, y Cetina Ortiz (2026) la usa para estudiar redes de bienestar estudiantil en territorios escolares.
+
 > [!warning] Cuándo no lo es
 > Si su pregunta exige medir, comparar grupos o generalizar a una población, el rizoma no es el método adecuado. Tampoco es una excusa para no tener diseño: exige más rigor en el registro, no menos.
 

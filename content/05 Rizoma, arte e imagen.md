@@ -18,6 +18,8 @@ Irwin et al. (2006) describen las **relaciones rizomáticas de la a/r/tografía*
 | Reverberaciones | Los efectos que una práctica produce en otras |
 | Exceso | Lo que desborda el control del investigador |
 
+En español, la propuesta llegó por dos vías. Irwin y García Sierra (2013) la presentaron en la *Revista Educación y Pedagogía* de la Universidad de Antioquia. Marín-Viadel y Roldán (2019) la situaron, junto a la investigación educativa basada en las artes visuales, en el panorama de las metodologías de la educación artística. Ramon y Alonso-Sanz (2022) llevaron la *c/a/r/tografía* (cartografía más a/r/tografía) al aula, como herramienta de pensamiento visual y complejo, en la revista *Kepes* de la Universidad de Caldas.
+
 ## El mapa como herramienta
 
 Pérez de Lama (2009) relee a Deleuze y Guattari desde la arquitectura y el arte: el mapa no representa un territorio, lo produce. Cartografiar con imágenes, recorridos, dibujos y dispositivos digitales es una forma de investigar.
