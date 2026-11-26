@@ -1,0 +1,68 @@
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+/* Tema claro y oscuro: recuerda la elección del visitante si el navegador lo permite */
+(function(){const r=document.documentElement;let t=null;try{t=localStorage.getItem("rizoma-tema")}catch(e){}if(t)r.dataset.theme=t;
+$("#tema").addEventListener("click",()=>{const oscuro=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;r.dataset.theme=oscuro?"light":"dark";try{localStorage.setItem("rizoma-tema",r.dataset.theme)}catch(e){}})})();
+/* Pestaña activa según la sección visible */
+const links=$$("nav.top li a");const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id))}})},{rootMargin:"-45% 0px -50% 0px"});
+$$("main section[id]").forEach(s=>io.observe(s));
+/* Copiar prompts */
+$$("[data-copy]").forEach(b=>b.addEventListener("click",async()=>{const old=b.textContent;try{await navigator.clipboard.writeText($("#"+b.dataset.copy).textContent);b.textContent="Copiado: péguelo en su IA"}catch(e){b.textContent="Seleccione el texto y cópielo"}setTimeout(()=>b.textContent=old,2200)}));
+
+/* ---------- Plantillas en Word con marca de agua (docx 8.5.0, misma base que la Ruta) ---------- */
+const LIBS={docx:["https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js","https://unpkg.com/docx@8.5.0/build/index.umd.js"]};
+const SRI={docx:"sha384-4xaIisuLEy2lo2HkB2C4rEf7v8jbTb2kuogX6TkuEt9feTWKBSFSOzsqNNbV+sKh"};
+let libP=null;
+function lib(){if(window.docx)return Promise.resolve(window.docx);if(libP)return libP;libP=(async()=>{for(const u of LIBS.docx){try{await new Promise((ok,ko)=>{const sc=document.createElement("script");sc.src=u;sc.integrity=SRI.docx;sc.crossOrigin="anonymous";sc.onload=ok;sc.onerror=ko;document.head.appendChild(sc)});if(window.docx)return window.docx}catch(e){}}libP=null;return null})();return libP}
+const HEAD="Laboratorio de investigación rizomática · Elver Chaparro Cardozo";
+const LIC="Plantilla y formato: Laboratorio de investigación rizomática, de Elver Chaparro Cardozo. Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0): https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es. El contenido escrito pertenece a su autor.";
+/* Marca de agua: rizoma azul al 11 % de opacidad, centrado detrás del texto */
+const WM_SVG="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' width='600' height='600'><g stroke='#1f5fa6' stroke-width='14' fill='none' stroke-linecap='round'><path d='M90 420Q200 260 300 300T520 150'/><path d='M140 140Q230 230 300 300'/><path d='M300 300Q340 430 450 470'/><path d='M300 300Q250 380 180 520'/></g><g fill='#1f5fa6'><circle cx='90' cy='420' r='30'/><circle cx='520' cy='150' r='30'/><circle cx='140' cy='140' r='24'/><circle cx='450' cy='470' r='24'/><circle cx='180' cy='520' r='20'/><circle cx='300' cy='300' r='42'/></g></svg>";
+let WM=null;
+(async()=>{try{const i=new Image();i.src="data:image/svg+xml,"+encodeURIComponent(WM_SVG);await i.decode();const c=document.createElement("canvas");c.width=c.height=600;const x=c.getContext("2d");x.globalAlpha=.11;x.drawImage(i,0,0,600,600);const b=await new Promise(r=>c.toBlob(r,"image/png"));WM=new Uint8Array(await b.arrayBuffer())}catch(e){}})();
+function wmHeader(d){try{if(!WM)return undefined;return{default:new d.Header({children:[new d.Paragraph({children:[new d.ImageRun({data:WM,transformation:{width:380,height:380},floating:{horizontalPosition:{relative:d.HorizontalPositionRelativeFrom.PAGE,align:d.HorizontalPositionAlign.CENTER},verticalPosition:{relative:d.VerticalPositionRelativeFrom.PAGE,align:d.VerticalPositionAlign.CENTER},behindDocument:true,allowOverlap:true}})]})]})}}catch(e){return undefined}}
+function cell(d,t,o={}){return new d.TableCell({children:[new d.Paragraph({children:[new d.TextRun({text:String(t??""),bold:!!o.bold,size:o.size||20,color:o.color})]})],shading:o.fill?{type:d.ShadingType.CLEAR,fill:o.fill,color:"auto"}:undefined,width:o.w?{size:o.w,type:d.WidthType.PERCENTAGE}:undefined})}
+function head(d,t){return new d.Paragraph({children:[new d.TextRun({text:t,bold:true,size:36,color:"0E1F33"})],spacing:{after:80}})}
+function sub(d,t){return new d.Paragraph({children:[new d.TextRun({text:t,size:20,color:"4B5563"})],spacing:{after:240}})}
+function h2(d,t){return new d.Paragraph({children:[new d.TextRun({text:t,bold:true,size:26,color:"1F5FA6"})],spacing:{before:280,after:100}})}
+function p(d,t,o={}){return new d.Paragraph({children:[new d.TextRun({text:t,size:o.size||21,italics:!!o.i,color:o.color})],spacing:{after:o.after??120}})}
+function table(d,rows){return new d.Table({width:{size:100,type:d.WidthType.PERCENTAGE},rows})}
+function hdrRow(d,H){return new d.TableRow({tableHeader:true,children:H.map((h,i)=>cell(d,h,{bold:true,fill:i===H.length-1?"1F5FA6":"0E1F33",color:"FFFFFF",size:18}))})}
+function blank(d,n,cols){return Array.from({length:n},()=>new d.TableRow({height:{value:620,rule:d.HeightRule.ATLEAST},children:Array.from({length:cols},()=>cell(d," "))}))}
+function kv(d,pairs){return table(d,pairs.map(([k,v])=>new d.TableRow({children:[cell(d,k,{bold:true,fill:"EAF1FA",w:32}),cell(d,v||" ",{w:68,color:v?"56637A":undefined})]})))}
+const docOf=(d,ch,land)=>new d.Document({styles:{default:{document:{run:{font:"Calibri",size:22}}}},sections:[{properties:{page:{margin:{top:1000,bottom:1000,left:1000,right:1000},size:land?{orientation:d.PageOrientation.LANDSCAPE,width:12240,height:15840}:undefined}},headers:wmHeader(d),footers:{default:new d.Footer({children:[new d.Paragraph({children:[new d.TextRun({text:LIC,size:15,color:"5D6572"})]})]})},children:ch}]});
+const ID=d=>kv(d,[["Investigador o investigadora",""],["Programa y universidad",""],["Título provisional",""],["Fecha y versión",""]]);
+const DOCS={
+ diario:{n:"Diario_del_cartografo.docx",land:true,build:d=>[head(d,"Diario del cartógrafo"),sub(d,HEAD),ID(d),
+   h2(d,"Cómo usarlo"),p(d,"Una fila por entrada. Registre la fecha, la situación y el gesto de atención (rastreo, toque, aterrizaje o reconocimiento atento). Anote lo que ocurrió con palabras del campo, cómo lo afectó a usted y qué conexiones percibe entre elementos heterogéneos. Este diario es el principal material de análisis y la base de la trazabilidad del estudio."),
+   table(d,[hdrRow(d,["Fecha y hora","Situación o lugar","Gesto de atención","Qué ocurrió (con palabras del campo)","Afectación propia","Conexiones percibidas","Preguntas que deja"]),...blank(d,8,7)]),
+   h2(d,"Cambios en el diseño"),p(d,"Cuando el campo obligue a cambiar algo del diseño, regístrelo aquí: qué cambió, por qué y en qué fecha."),
+   table(d,[hdrRow(d,["Fecha","Qué cambió","Por qué","Efecto esperado"]),...blank(d,4,4)])]},
+ matriz:{n:"Matriz_de_coherencia_rizomatica.docx",build:d=>[head(d,"Matriz de coherencia rizomática"),sub(d,HEAD),ID(d),
+   h2(d,"Elementos del diseño"),kv(d,[["Pregunta de proceso","Pregunte cómo, no qué es."],["Entrada al campo","Espacio, acontecimiento, práctica u objeto por el que entra, y por qué."],["Implicación","Desde dónde llega usted al campo."],["Ensamblaje de materiales","Diario (obligatorio) y demás materiales heterogéneos."],["Conceptos con los que piensa","Devenir, territorio, agenciamiento, líneas… y sus autores."],["Procedimiento de análisis","Acontecimientos, mapas de conexiones, líneas, lectura con conceptos."],["Escritura","Mapa general y mesetas previstas."],["Restitución","Cómo y cuándo devolverá el mapa a los participantes."],["Cuidados éticos","Consentimiento, imágenes, datos en local."]]),
+   h2(d,"Revisión de coherencia"),table(d,[hdrRow(d,["Elemento","Pregunta guía","Cumple / Parcial / No","Ajuste necesario"]),...[["Pregunta","¿Pregunta por un proceso (cómo)?"],["Entrada","¿Está justificada y declarada la implicación?"],["Materiales","¿Son heterogéneos y coherentes con la pregunta?"],["Registro","¿El diario permite reconstruir el recorrido?"],["Análisis","¿Sigue conexiones y líneas, no solo categorías?"],["Conceptos","¿Se piensa con ellos o solo se citan?"],["Escritura","¿El mapa y las mesetas muestran el proceso?"]].map(([a,b])=>new d.TableRow({children:[cell(d,a,{bold:true}),cell(d,b),cell(d," "),cell(d," ")]}))]),
+   p(d,"Recuerde: son pistas, no receta. El diseño se reescribe en el campo y el diario registra cada cambio.",{i:true,color:"56637A"})]},
+ mapa:{n:"Mapa_de_conexiones_y_lineas.docx",land:true,build:d=>[head(d,"Mapa de conexiones y líneas"),sub(d,HEAD),ID(d),
+   h2(d,"1. Conexiones"),p(d,"Anote los vínculos entre elementos heterogéneos tal como aparecen en el material. Tipo de vínculo: material, discursivo, afectivo o institucional."),
+   table(d,[hdrRow(d,["Nodo de origen","Nodo de destino","Tipo de vínculo","Evidencia (fecha y cita del diario o material)"]),...blank(d,10,4)]),
+   h2(d,"2. Líneas"),table(d,[hdrRow(d,["Tipo de línea","Qué segmenta, flexibiliza o hace escapar","Elementos que la componen","Evidencia"]),...["Línea dura","Línea flexible","Línea de fuga"].map(t=>new d.TableRow({height:{value:900,rule:d.HeightRule.ATLEAST},children:[cell(d,t,{bold:true}),cell(d," "),cell(d," "),cell(d," ")]}))]),
+   h2(d,"3. Dibujo del mapa"),p(d,"Dibuje o pegue aquí el mapa: nodos como círculos, vínculos como líneas, líneas de fuga punteadas. Indique la versión y la fecha; conserve las versiones anteriores.")]},
+ meseta:{n:"Plantilla_de_meseta.docx",build:d=>[head(d,"Plantilla de meseta"),sub(d,HEAD),ID(d),
+   p(d,"Una meseta es un texto relativamente autónomo que desarrolla un nudo del mapa sin pretender cerrarlo. Puede leerse en distinto orden que las demás."),
+   kv(d,[["Título de la meseta",""],["Nudo del mapa que desarrolla",""],["Material que la sostiene","Fragmentos del diario, conversaciones, imágenes, con fecha."],["Concepto con el que se piensa","Y su autor."],["Qué hace este nudo","Conexiones que produce, afectos, qué abre o cierra."],["Líneas que aparecen","Duras, flexibles, de fuga."],["Relación con otras mesetas",""],["Preguntas que deja abiertas",""],["Comentarios de los participantes","Tras la restitución."]]),
+   h2(d,"Texto de la meseta"),p(d," ",{after:2400})]},
+ consentimiento:{n:"Consentimiento_diseno_abierto.docx",build:d=>[head(d,"Consentimiento informado para un diseño abierto"),sub(d,HEAD+" · Borrador para adaptar con su comité de ética"),
+   p(d,"Este documento es un borrador orientativo. Debe adaptarse a la normativa de su país y a los requisitos del comité de ética de su institución antes de usarse.",{i:true,color:"C81E4A"}),
+   kv(d,[["Título de la investigación",""],["Investigador responsable y contacto",""],["Institución y comité de ética",""]]),
+   h2(d,"Lo que debe saber"),
+   ...["Propósito: comprender cómo se producen y transforman [proceso] en [contexto].","Diseño abierto: esta investigación sigue lo que ocurre en el campo, por lo que algunas actividades pueden cambiar. Si un cambio afecta su participación, se le informará y podrá decidir de nuevo.","Qué se registrará: notas de campo, conversaciones [grabadas / no grabadas], imágenes o producciones que usted decida compartir.","Imágenes: ninguna imagen en la que usted sea identificable se publicará sin una autorización adicional y específica.","Restitución: se le mostrarán los mapas y textos producidos para que pueda comentarlos o pedir cambios sobre lo que le concierne.","Datos: los materiales se guardarán de forma segura y no se subirán a servicios de inteligencia artificial en la nube sin su autorización expresa.","Participación voluntaria: puede retirarse en cualquier momento sin consecuencias y pedir que se retire su material."].map(t=>new d.Paragraph({text:t,bullet:{level:0},spacing:{after:80}})),
+   h2(d,"Autorizaciones"),table(d,[hdrRow(d,["Autorizo","Sí","No"]),...["Participar en la investigación","Que se graben las conversaciones","Que se usen mis imágenes o producciones de forma anónima","Que se publiquen imágenes en las que soy identificable","Que se use IA sobre mis datos anonimizados"].map(t=>new d.TableRow({children:[cell(d,t),cell(d," "),cell(d," ")]}))]),
+   kv(d,[["Nombre del participante",""],["Firma y fecha",""],["Nombre y firma del investigador",""]])]},
+ ia:{n:"Declaracion_de_uso_de_IA.docx",land:true,build:d=>[head(d,"Declaración de uso de inteligencia artificial"),sub(d,HEAD),ID(d),
+   p(d,"La IA forma parte del ensamblaje de investigación: no es neutral y debe declararse. Registre cada uso relevante."),
+   table(d,[hdrRow(d,["Fecha","Herramienta y versión","Tarea","Datos entregados (¿anonimizados?)","Qué revisó o corrigió usted","Qué decidió no delegar"]),...blank(d,8,6)]),
+   h2(d,"Declaración para el informe"),p(d,"En esta investigación se utilizó [herramienta] para [tarea] entre [fechas]. Los resultados fueron revisados por el investigador, que conserva la responsabilidad sobre el análisis, la interpretación y la escritura. No se entregaron a la herramienta datos que permitieran identificar a los participantes.")]}
+};
+function save(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}
+$$("[data-doc]").forEach(b=>b.addEventListener("click",async()=>{const k=b.dataset.doc,D=DOCS[k];b.disabled=true;$("#estadoDoc").textContent="Preparando el documento…";
+ try{const d=await lib();if(!d)throw 0;save(await d.Packer.toBlob(docOf(d,D.build(d),D.land)),D.n);$("#estadoDoc").textContent="Documento descargado: "+D.n}catch(e){$("#estadoDoc").textContent="No se pudo crear el documento. Revise la conexión e intente de nuevo."}finally{b.disabled=false}}));
