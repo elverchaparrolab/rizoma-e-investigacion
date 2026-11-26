@@ -54,6 +54,12 @@ export const DefaultFrame: PageFrame = {
               <a href="https://elverchaparrolab.wordpress.com/contenido/">Contenidos y herramientas</a>
               <a href="https://elverchaparrolab.github.io/elver.chaparro-LAB/">Jardín digital</a>
             </nav>
+            <div class="idioma notranslate" translate="no" role="group" aria-label="Idioma">
+              <a data-lang="es" href="https://elverchaparrolab.github.io/rizoma-e-investigacion/" aria-current="true" title="Español">ES</a>
+              <a data-lang="en" href="https://elverchaparrolab-github-io.translate.goog/rizoma-e-investigacion/?_x_tr_sl=es&_x_tr_tl=en&_x_tr_hl=es" title="English (traducción automática)">EN</a>
+              <a data-lang="pt" href="https://elverchaparrolab-github-io.translate.goog/rizoma-e-investigacion/?_x_tr_sl=es&_x_tr_tl=pt&_x_tr_hl=es" title="Português (tradução automática)">PT</a>
+            </div>
+            <script dangerouslySetInnerHTML={{ __html: '(function(){var O="https://elverchaparrolab.github.io",T="https://elverchaparrolab-github-io.translate.goog",p=location.pathname,cur="es";try{var tl=new URLSearchParams(location.search).get("_x_tr_tl");if(location.hostname.slice(-14)==="translate.goog"&&tl)cur=tl.slice(0,2)}catch(e){}var D={es:O+p,en:T+p+"?_x_tr_sl=es&_x_tr_tl=en&_x_tr_hl=es",pt:T+p+"?_x_tr_sl=es&_x_tr_tl=pt&_x_tr_hl=es"};document.querySelectorAll(".idioma a[data-lang]").forEach(function(a){var l=a.getAttribute("data-lang");a.href=D[l];if(l===cur)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current");a.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();if(l===cur)return;try{window.top.location.href=D[l]}catch(_){location.href=D[l]}},true)})})();' }} />
             <p class="mooc-autoria">
               <span class="eb">Metodologías de investigación</span>
               <strong>Rizoma e investigación</strong> · Desarrollado por <strong>Elver Chaparro Cardozo</strong> · © 2026 · Algunos derechos reservados (CC BY-NC-SA 4.0)
