@@ -29,7 +29,23 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
       - name: Construir el sitio
-        run: npx quartz build
+        run: node quartz/bootstrap-cli.mjs build
+      - name: Publicar el laboratorio como entrada y conservar las lecturas
+        if: ${{ hashFiles('sitio/laboratorio.html') != '' }}
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil
+          source = Path('sitio')
+          target = Path('public')
+          assets = '''index.html styles.css guide.js laboratorio.html laboratorio.css core.js laboratorio.js ai-core.js ai-worker.js tarjeta.png elver-chaparro-cardozo.jpg'''.split()
+          missing = [name for name in assets if not (source / name).is_file()]
+          if missing:
+              raise SystemExit('Faltan archivos del laboratorio: ' + ', '.join(missing))
+          for name in assets:
+              shutil.copy2(source / name, target / name)
+          print(f'Laboratorio publicado con {len(assets)} archivos; lecturas de Quartz conservadas.')
+          PY
       - name: Evitar el procesamiento de Jekyll
         run: touch public/.nojekyll
       - name: Publicar en la rama gh-pages
